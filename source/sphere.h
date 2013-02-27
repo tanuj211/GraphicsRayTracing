@@ -12,6 +12,10 @@ class Sphere : public Object3D{
 
 public:
 
+  Vec3f _centre;
+  float _radius;
+  Vec3f _color;
+
   // Default constructor.
   Sphere();
 
