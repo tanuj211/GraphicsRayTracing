@@ -12,7 +12,7 @@ class OrthographicCamera : public Camera{
 	Vec3f _direction;
 	Vec3f _up;
 	Vec3f _horizontal;
-	float size;
+	float _size;
 
 public:
 

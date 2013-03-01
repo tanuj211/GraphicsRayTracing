@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 
   // Do the rendering.
   renderRGBImage(scene, rgbImage);
-  renderDepthImage(scene, depthImage);
+  //renderDepthImage(scene, depthImage);
 
   // Write results if necessary.
   if (_outputNameRGB != NULL) {
@@ -78,9 +78,17 @@ int main(int argc, char** argv) {
 
 // Render a color image of objects in a scene.
 void renderRGBImage(SceneParser &scene, Image &image) {
-
-  // YOUR CODE HERE.
-
+  for(float i = 0; i < image.Width(); i++) {
+    for (float j = 0; j < image.Height(); j++) {
+      Ray *newRay = new Ray(scene.getCamera()->generateRay(Vec2f(i/image.Width(), j/image.Height())));
+      //cout << "Done Generate Ray" << endl;
+      Hit *newHit = new Hit(_depthMax, scene.getBackgroundColor());
+      //cout << "Done hit" << endl;
+      scene.getGroup()->intersect(*newRay, *newHit);
+      //cout << "Intersect" << endl;
+      image.SetPixel(i, j, newHit->getColor());
+    }
+  }
 }
 
 // Render an image showing the depth of objects from the camera.
